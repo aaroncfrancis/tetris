@@ -7,10 +7,21 @@ class Tetris:
         """input of the constructor is an application instance"""
         self.app = app
         self.spriteGroup = pg.sprite.Group()
+        self.fieldArray = self.getFieldArray()
         self.tetromino = Tetromino(self)
+
+    def putTetrominoBlocksInArray(self):
+        """storing pointer that we will use to calculate collisions when called"""
+        for block in self.tetromino.blocks:
+            x,y = int(block.pos.x), int(block.pos.y)
+            self.fieldArray[y][x] = block
+    
+    def getFieldArray(self):
+        return [[0 for x in range(field_w)] for y in range(field_h)]
 
     def checkTetrominoLanding(self): #new method that will be called in update
         if self.tetromino.landing:
+            self.putTetrominoBlocksInArray()
             self.tetromino = Tetromino(self)
 
     def control(self, keyPress):

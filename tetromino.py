@@ -21,7 +21,7 @@ class Block(pg.sprite.Sprite):
     def collision(self, pos):
         """check if block is in the field. if yes, no collision"""
         x,y = int(pos.x), int(pos.y)
-        if 0 <= x <field_w and y < field_h:
+        if 0 <= x <field_w and y < field_h and (y < 0 or not self.tetromino.tetris.fieldArray[y][x]):
             return False
         return True
 
