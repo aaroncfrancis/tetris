@@ -13,8 +13,12 @@ class App:
 
     def setTimer(self):
         self.user_event = pg.USEREVENT + 0 
+        self.fast_user_event = pg.USEREVENT + 1 
         self.anim_trigger = False
+        self.fast_anim_trigger = False
         pg.time.set_timer(self.user_event, animationTimeInterval)
+        pg.time.set_timer(self.fast_user_event, fastAnimationTimeInterval)
+
 
     def update(self):
         self.tetris.update()
@@ -27,6 +31,7 @@ class App:
 
     def checkEvents(self):
         self.anim_trigger = False
+        self.fast_anim_trigger = False
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.QUIT()
@@ -35,6 +40,8 @@ class App:
                 self.tetris.control(keyPress=event.key)
             elif event.type == self.user_event:
                 self.anim_trigger = True
+            elif event.type == self.fast_user_event:
+                self.fast_anim_trigger = True
     
     def run(self):
         while True:

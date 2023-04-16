@@ -25,7 +25,7 @@ class Block(pg.sprite.Sprite):
     def set_rect_pos(self):
         self.rect.topleft = self.pos * tileSize
     
-    def update(self):
+    def update(self):  
         self.isAlive()
         self.set_rect_pos()
 

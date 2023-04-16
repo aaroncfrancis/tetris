@@ -6,6 +6,7 @@ fps = 60
 fieldColor = (33,33,33)
 
 animationTimeInterval = 150 # in milliseconds
+fastAnimationTimeInterval = 15 
 
 tileSize = 50
 fieldSize = field_w, field_h = 10,20

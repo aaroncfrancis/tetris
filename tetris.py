@@ -9,6 +9,7 @@ class Tetris:
         self.spriteGroup = pg.sprite.Group()
         self.fieldArray = self.getFieldArray()
         self.tetromino = Tetromino(self)
+        self.speedUp = False
     
     def checkFullLines(self):
         row = field_h - 1
@@ -26,7 +27,6 @@ class Tetris:
                     self.fieldArray[row][x].alive = False
                     self.fieldArray[row][x] = 0
 
-
     def putTetrominoBlocksInArray(self):
         """storing pointer that we will use to calculate collisions when called"""
         for block in self.tetromino.blocks:
@@ -38,6 +38,7 @@ class Tetris:
 
     def checkTetrominoLanding(self): #new method that will be called in update
         if self.tetromino.landing:
+            self.speedUp = False
             self.putTetrominoBlocksInArray()
             self.tetromino = Tetromino(self)
 
@@ -48,6 +49,8 @@ class Tetris:
             self.tetromino.move(direction='right')
         elif keyPress == pg.K_UP:
             self.tetromino.rotate()
+        elif keyPress == pg.K_DOWN:
+            self.speedUp = True
 
     def draw_grid(self):
         for x in range(field_w):
@@ -55,7 +58,8 @@ class Tetris:
                 pg.draw.rect(self.app.screen, 'black', (x * tileSize, y * tileSize, tileSize, tileSize),1)
 
     def update(self):
-        if self.app.anim_trigger:
+        trigger = [self.app.anim_trigger, self.app.fast_anim_trigger][self.speedUp]
+        if trigger:
             self.checkFullLines()  
             self.tetromino.update()
             self.checkTetrominoLanding()
