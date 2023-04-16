@@ -1,5 +1,6 @@
 from settings import *
 from tetris import Tetris
+from pygame import mixer
 import sys
 import pathlib
 
@@ -12,6 +13,11 @@ class App:
         self.setTimer()
         self.images = self.loadImages()
         self.tetris = Tetris(self)
+        self.music()
+
+    def music(self):
+        mixer.music.load("tetrisThemeEdited.wav")
+        mixer.music.play(-1)        
 
     def loadImages(self):
         files = [item for item in pathlib.Path(spriteDirPath).rglob('*.png') if item.is_file()]

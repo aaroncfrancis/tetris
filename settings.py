@@ -10,7 +10,7 @@ fieldColor = (33,33,33)
 animationTimeInterval = 150 # in milliseconds
 fastAnimationTimeInterval = 15 
 
-tileSize = 50
+tileSize = 40
 fieldSize = field_w, field_h = 10,20
 fieldRes = field_w * tileSize, field_h * tileSize
 

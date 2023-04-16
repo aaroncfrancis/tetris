@@ -1,6 +1,7 @@
 from settings import *
 import math
 from tetromino import Tetromino
+from pygame import mixer
 
 class Tetris:
     def __init__(self, app): 
@@ -22,10 +23,13 @@ class Tetris:
 
             if sum(map(bool, self.fieldArray[y])) < field_w:
                 row -= 1 # drop row 
+                
             else: 
                 for x in range(field_w):
                     self.fieldArray[row][x].alive = False
                     self.fieldArray[row][x] = 0
+                    popSound = mixer.Sound('popEdited.wav')
+                    popSound.play()
 
     def putTetrominoBlocksInArray(self):
         """storing pointer that we will use to calculate collisions when called"""
@@ -33,14 +37,22 @@ class Tetris:
             x,y = int(block.pos.x), int(block.pos.y)
             self.fieldArray[y][x] = block
     
+    def isGameOver(self):
+        if self.tetromino.blocks[0].pos.y == init_pos_offset[1]:
+            pg.time.wait(300)
+            return True
+    
     def getFieldArray(self):
         return [[0 for x in range(field_w)] for y in range(field_h)]
 
     def checkTetrominoLanding(self): #new method that will be called in update
         if self.tetromino.landing:
-            self.speedUp = False
-            self.putTetrominoBlocksInArray()
-            self.tetromino = Tetromino(self)
+            if self.isGameOver():
+                self.__init__(self.app)
+            else:
+                self.speedUp = False
+                self.putTetrominoBlocksInArray()
+                self.tetromino = Tetromino(self)
 
     def control(self, keyPress):
         if keyPress == pg.K_LEFT:

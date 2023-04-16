@@ -9,7 +9,7 @@ class Block(pg.sprite.Sprite):
     
         """to draw block pass it to parent of constructor"""
         super().__init__(tetromino.tetris.spriteGroup)
-        self.image = tetromino.image
+        self.image = tetromino.images
         # self.image = pg.Surface([tileSize, tileSize])
         # pg.draw.rect(self.image, 'orange', (1,1, tileSize - 2, tileSize - 1), border_radius =8)
         self.rect = self.image.get_rect()
