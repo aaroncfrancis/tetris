@@ -6,7 +6,7 @@ This game is a replica of the original Tetris created by Alexey Pajitnov. Blocks
 
 <h1>Technologies Used</h1>
 <h2>Pygame</h2> A popular Python library for building 2D games, which provides a variety of functions and tools for creating game graphics, handling user input, and managing game logic.
-<h2>Other Python Libraries</h2> I used other Python libraries such as random and time to generate random positions for the enemy spaceships and implement timing and delays in the game.
+<h2>Other Python Libraries</h2> I used other Python libraries such as random, pathlib, mixer
 <h2>Object-Oriented Programming (OOP)</h2> I utilized OOP concepts such as classes, objects, and inheritance to structure the game code and create reusable game objects, making the code more organized and maintainable.
 
 What I Learned</h1>
@@ -15,7 +15,8 @@ What I Learned</h1>
 <h2> Game Development Workflow</h2> I learned about the game development workflow, including designing game assets, implementing game logic, debugging and testing, and iterating on the game to improve its functionality and gameplay. While following the tutorial, I added my own creative elements to the game, such as customizing the game's appearance, implementing additional game features, and enhancing the gameplay experience with sound effects and visual effects.
 
 <h1>Acknowledgements</h1>
-I would like to thank the YouTube tutorial from <a href="https://www.youtube.com/@CoderSpaceChannel">Coder Space</a> that I followed for providing a foundation for building this game. The tutorial helped me understand the basic concepts of game development using Pygame and sparked my interest in exploring further on my own. I also appreciate the Pygame community for providing helpful documentation and examples that aided my learning process.
+I would like to thank the YouTube tutorial from <a href="https://www.youtube.com/@CoderSpaceChannel">Coder Space</a> that I followed for providing a tutorial for building this game. The tutorial helped me understand the basic concepts of game development using Pygame and sparked my interest in exploring further on my own. I also appreciate the Pygame community for providing helpful documentation and examples that aided my learning process.
+Music: Hold on Tight by Aespa
 
 <h1>Conclusion</h1>
 Building this game using Pygame has been a challenging yet rewarding experience. I am proud of the skills I have gained in OOP programming and Pygame development, and I am excited to continue exploring and improving my game development skills in the future. I hope you enjoy playing the game and appreciate the effort and creativity that I have put into it!
