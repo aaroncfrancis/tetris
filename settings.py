@@ -2,6 +2,8 @@ import pygame as pg
 
 vec = pg.math.Vector2
 
+spriteDirPath = 'assets\sprites'
+
 fps = 60
 fieldColor = (33,33,33)
 
