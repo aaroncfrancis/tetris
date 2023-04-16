@@ -5,17 +5,28 @@ class Block(pg.sprite.Sprite):
     def __init__(self, tetromino, pos):
         self.tetromino = tetromino
         self.pos = vec(pos) + init_pos_offset
+        self.alive = True
     
         """to draw block pass it to parent of constructor"""
         super().__init__(tetromino.tetris.spriteGroup)
         self.image = pg.Surface([tileSize, tileSize])
-        self.image.fill('orange')
+        pg.draw.rect(self.image, 'orange', (1,1, tileSize - 2, tileSize - 1), border_radius =8)
         self.rect = self.image.get_rect()
+    
+    def isAlive(self):
+        if not self.alive:
+            self.kill() #removes sprite from groups its contained in
+
+    def rotate(self, pivotPos):
+        translated = self.pos - pivotPos
+        rotated = translated.rotate(90)
+        return rotated + pivotPos
         
     def set_rect_pos(self):
         self.rect.topleft = self.pos * tileSize
     
     def update(self):
+        self.isAlive()
         self.set_rect_pos()
 
     def collision(self, pos):
@@ -31,6 +42,14 @@ class Tetromino:
         self.shape = random.choice(list(tetrominoes.keys()))
         self.blocks = [Block(self, pos) for pos in tetrominoes[self.shape]]
         self.landing = False
+
+    def rotate(self):
+        pivotPos = self.blocks[0].pos
+        newBlockPositions = [block.rotate(pivotPos) for block in self.blocks]
+
+        if not self.collision(newBlockPositions):
+            for i, block in enumerate(self.blocks):
+                block.pos = newBlockPositions[i]
 
     def collision(self, blockPositions):
         """checks if any blocks have collisions"""
