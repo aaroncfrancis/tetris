@@ -33,7 +33,6 @@ class App:
         pg.time.set_timer(self.user_event, animationTimeInterval)
         pg.time.set_timer(self.fast_user_event, fastAnimationTimeInterval)
 
-
     def update(self):
         self.tetris.update()
         self.clock.tick(fps)
