@@ -14,6 +14,7 @@ class App:
         self.images = self.loadImages()
         self.tetris = Tetris(self)
         self.music()
+        pg.key.set_repeat()
 
     def music(self):
         mixer.music.load("tetrisThemeEdited.wav")

@@ -38,13 +38,19 @@ class Block(pg.sprite.Sprite):
         return True
 
 class Tetromino:
-    def __init__(self, tetris):
+    def __init__(self, tetris, shape = None):
         self.tetris = tetris
-        self.shape = random.choice(list(tetrominoes.keys()))
+        if shape == None:
+            self.shape = random.choice(list(tetrominoes.keys()))
+        else:
+            self.shape = shape
         self.images = random.choice(tetris.app.images)
         self.blocks = [Block(self, pos) for pos in tetrominoes[self.shape]]
         self.landing = False
 
+    def resetPosition(self):
+        self.blocks = [Block(self, pos) for pos in tetrominoes[self.shape]]
+        
     def rotate(self):
         pivotPos = self.blocks[0].pos
         newBlockPositions = [block.rotate(pivotPos) for block in self.blocks]

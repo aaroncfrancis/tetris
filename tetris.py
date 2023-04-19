@@ -11,7 +11,26 @@ class Tetris:
         self.fieldArray = self.getFieldArray()
         self.tetromino = Tetromino(self)
         self.speedUp = False
-    
+        self.hold = None
+        self.holdAvailable = True
+
+    def holdBlock(self):
+        if self.holdAvailable:
+            self.holdAvailable = False
+            if self.hold: # implies that it is not "None"
+                oldShape = self.hold
+                shape = self.tetromino.shape
+                for block in self.tetromino.blocks:
+                    block.kill()
+                self.hold = shape 
+                self.tetromino = Tetromino(self, shape = oldShape)
+            else:
+                shape = self.tetromino.shape
+                for block in self.tetromino.blocks:
+                    block.kill()
+                self.hold = shape
+                self.tetromino = Tetromino(self)
+
     def checkFullLines(self):
         row = field_h - 1
         for y in range(field_h - 1, -1, -1):
@@ -53,6 +72,7 @@ class Tetris:
                 self.speedUp = False
                 self.putTetrominoBlocksInArray()
                 self.tetromino = Tetromino(self)
+                self.holdAvailable = True
 
     def control(self, keyPress):
         if keyPress == pg.K_LEFT:
@@ -63,6 +83,8 @@ class Tetris:
             self.tetromino.rotate()
         elif keyPress == pg.K_DOWN:
             self.speedUp = True
+        elif keyPress == pg.K_LSHIFT:
+            self.holdBlock()
 
     def draw_grid(self):
         for x in range(field_w):
