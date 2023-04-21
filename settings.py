@@ -6,6 +6,7 @@ spriteDirPath = 'assets\sprites'
 
 fps = 60
 fieldColor = (33,33,33)
+bkgColor = (73,73,73)
 
 animationTimeInterval = 150 # in milliseconds
 fastAnimationTimeInterval = 15 
@@ -14,7 +15,10 @@ tileSize = 40
 fieldSize = field_w, field_h = 10,20
 fieldRes = field_w * tileSize, field_h * tileSize
 
+winRes = win_w, win_h = fieldRes[0] *field_w, fieldRes[1] * field_h
+
 init_pos_offset = vec(field_w // 2 - 1, 0)
+next_pos_offset = vec(field_w * 1.4, field_h * 0.4)
 moveDirections = {
     'left': vec(-1,0),
     'right': vec(1,0),

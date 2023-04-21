@@ -5,6 +5,7 @@ class Block(pg.sprite.Sprite):
     def __init__(self, tetromino, pos):
         self.tetromino = tetromino
         self.pos = vec(pos) + init_pos_offset
+        self.next_pos = vec(pos) + next_pos_offset
         self.alive = True
     
         """to draw block pass it to parent of constructor"""
@@ -24,6 +25,7 @@ class Block(pg.sprite.Sprite):
         return rotated + pivotPos
         
     def set_rect_pos(self):
+        pos = [self.next_pos, self.pos][self.tetromino.current]
         self.rect.topleft = self.pos * tileSize
     
     def update(self):  
@@ -38,7 +40,7 @@ class Block(pg.sprite.Sprite):
         return True
 
 class Tetromino:
-    def __init__(self, tetris, shape = None):
+    def __init__(self, tetris, shape = None, current=True):
         self.tetris = tetris
         if shape == None:
             self.shape = random.choice(list(tetrominoes.keys()))
@@ -47,6 +49,7 @@ class Tetromino:
         self.images = random.choice(tetris.app.images)
         self.blocks = [Block(self, pos) for pos in tetrominoes[self.shape]]
         self.landing = False
+        self.current = current
 
     def resetPosition(self):
         self.blocks = [Block(self, pos) for pos in tetrominoes[self.shape]]
