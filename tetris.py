@@ -13,7 +13,6 @@ class Tetris:
         self.speedUp = False
         self.hold = None
         self.holdAvailable = True
-        self.nextTetromino = Tetromino(self, current=False)
 
     def holdBlock(self):
         if self.holdAvailable:
@@ -72,9 +71,7 @@ class Tetris:
             else:
                 self.speedUp = False
                 self.putTetrominoBlocksInArray()
-                self.nextTetromino.currrent = True
-                self.tetromino = self.nextTetromino
-                self.nextTetromino = Tetromino(self, current=False)
+                self.tetromino = Tetromino(self)
                 self.holdAvailable = True
 
     def control(self, keyPress):
